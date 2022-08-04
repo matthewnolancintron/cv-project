@@ -13,3 +13,21 @@ input fields.
 complete this using state and props.
 
 plan:
+option 1:
+    could turn app into a single form
+
+option 2:
+    each section/component into it's own form
+
+
+option 1:
+methods would need to update more of state
+each time the user edits the cv,
+edit submit button would live in app,
+and app would be a single form composed of component sections
+
+option 2:
+each component/section would be a form,
+edit/submit button would live on each component,
+
+I'll try option 2.
