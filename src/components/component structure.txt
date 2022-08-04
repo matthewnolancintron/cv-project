@@ -1,22 +1,8 @@
-component for general info:
-name,email,phonenumber
-
-component for educational experince:
-school, study date of study
-
-component practical experience:
-(company name,
-position title,
-main tasks of your jobs,
-date from and until 
-when you worked for that company)
-
-
 components
-UserInfo
-EducationalExperiences
-PracticalExperiences
-
+    App
+    GeneralInfo 
+    EducationInfo
+    JobExpInfo
 App
     UserInfo
     EducationalExperiences
