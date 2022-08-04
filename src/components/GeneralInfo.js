@@ -4,6 +4,7 @@ class GeneralInfo extends React.Component{
         return
         // component for general info:
         // name,email,phonenumber
+        
     }
 }
 export default GeneralInfo
