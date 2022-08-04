@@ -1,0 +1,15 @@
+Components/sections
+should have edit/submit button
+or the whole cv should have a edit/submit button
+
+submit button shuld submit form and display value of
+input fields in HTML element.
+
+edit button should display input fields
+with previously dispalyed info as values
+should be able to edit and resubmit content from
+input fields.
+
+complete this using state and props.
+
+plan:
