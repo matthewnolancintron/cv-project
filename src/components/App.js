@@ -27,20 +27,12 @@ class App extends React.Component {
   }
 
   toggleEdit(e) {
-    // should update state depeneding on edit or submit
-    //button pressed
-    // console.log(e);
+    // should update state depeneding on edit or submit.
+    //button's id that was pressed.
 
     /**
-     * instead of filtering out prop from state object
-     * check for it value and toggle it to the other value
-     * before returning it back from array to object
-     *
-     * or don't need to convert just create object copy
-     * and update or toggle value of prop in object copy
-     * and use that as new state.
+     * toggles value in state corresponding to button's id
      */
-    console.log(e.id);
 
     this.setState((state, props) => {
       console.log(state[e.id])
@@ -78,7 +70,6 @@ class App extends React.Component {
    * and get it in child component with this.props.someToggleEditValue
    * or use a single x={and add a data structure that hold them for each section}
    */
-
   render() {
     return (
       <div>
