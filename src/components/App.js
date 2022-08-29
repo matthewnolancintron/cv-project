@@ -1,7 +1,5 @@
 import React from "react";
-import GeneralInfo from "./GeneralInfo";
-import EducationInfo from "./EducationInfo";
-import JobExpInfo from "./JobExpInfo";
+import CategoryInfo from "./CategoryInfo";
 
 class App extends React.Component {
   constructor(props) {
@@ -73,9 +71,34 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <GeneralInfo toggleEdit={this.toggleEdit} generalInfoToggleEditValues={this.state.toggleEditName} />
-        <EducationInfo toggleEdit={this.toggleEdit} />
-        <JobExpInfo toggleEdit={this.toggleEdit} />
+        {/* general info */}
+        <CategoryInfo
+          categoryName={'general info'}
+          formFieldsData={[
+            {
+              fieldName:'name',
+              toggleButtonId:'name',
+              toggleButtonText:'edit'
+
+            },
+            {
+              fieldName:'email',
+              toggleButtonId:'email',
+              toggleButtonText:'edit'
+
+            }
+          ]}
+          toggleEdit={this.toggleEdit}
+          generalInfoToggleEditValues={this.state.toggleEditName}>
+
+          </CategoryInfo>
+        
+        {/* education info */}
+        {/* <CategoryInfo categoryName={'education info'} numberOfFormFields={2} toggleEdit={this.toggleEdit} generalInfoToggleEditValues={this.state.toggleEditName}></CategoryInfo> */}
+        
+        {/* job exp info */}
+        {/* <CategoryInfo categoryName={'job exp info'} numberOfFormFields={4} toggleEdit={this.toggleEdit} generalInfoToggleEditValues={this.state.toggleEditName}></CategoryInfo> */}
+        
       </div>
     );
   }
