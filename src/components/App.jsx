@@ -1,15 +1,21 @@
 import React from "react";
 import CategoryInfo from "./CategoryInfo";
+import { nanoid } from 'nanoid'
+
+let keysForFormFields = Array.from(Array(7),(e,i)=>nanoid());
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
       // toggleEdit is set to notInEditMode or inEditMode
 
       // general info
       toggleEditName: "notInEditMode",
+      //holds value from input
+      nameInput:'',
       toggleEditEmail: "notInEditMode",
 
       // educational info
@@ -29,16 +35,29 @@ class App extends React.Component {
     //button's id that was pressed.
 
     /**
-     * toggles value in state corresponding to button's id
+     * toggles value in state associated with button's id
      */
-
-    this.setState((state, props) => {
-      console.log(state[e.id])
+    this.setState((state) => {
       return {
         [e.id]: state[e.id] === 'notInEditMode' ? 'inEditMode' : 'notInEditMode',
       };
     });
   
+  }
+
+  handleInputChange(e){
+    /**
+      saves text from this input to a value in app's state it will save to the
+      correct property in state using the id of the input as "link"
+      that property will be used for the text display
+      then re-use the toggle edit button when ready to switch back to "display mode"      
+     */
+    this.setState(state =>{
+      return{
+        [e.id]:e.value
+      };
+    });
+
   }
 
   /**
@@ -75,30 +94,56 @@ class App extends React.Component {
         <CategoryInfo
           categoryName={'general info'}
           formFieldsData={[
+            /**
+              button id shares it's name with the toogle edit values
+              in app's state since it's used in the toggle edit method
+              to determine which state value to update
+              depending on which formField button was pressed
+              the names link the buttons to the correct 
+              property in state.
+            */
             {
-              fieldName:'name',
-              toggleButtonId:'name',
-              toggleButtonText:'edit'
+              // text/edit
+              labelText:'name',
+              fieldName:this.state.nameInput,
+              toggleButtonId:'toggleEditName',
+              toggleButtonText:this.state.toggleEditName === 'notInEditMode' ? 'edit name':'submit',
+              
+              // input/submit
+              inputId:'nameInput',
+              inputValue:this.state.nameInput,
+              submitButtonId:'nameSubmit',
+
+              //both
+              key:keysForFormFields[0],
+              isInEditMode:this.state.toggleEditName,
 
             },
             {
+
+              //set similary to name
               fieldName:'email',
-              toggleButtonId:'email',
-              toggleButtonText:'edit'
+              toggleButtonId:'toggleEditEmail',
+              toggleButtonText:'edit',
+              key:keysForFormFields[1],
+              isInEditMode:this.state.toggleEditEmail
 
             }
           ]}
           toggleEdit={this.toggleEdit}
-          generalInfoToggleEditValues={this.state.toggleEditName}>
+          handleInputChange={this.handleInputChange}
+          >
 
           </CategoryInfo>
         
+        
         {/* education info */}
         {/* <CategoryInfo categoryName={'education info'} numberOfFormFields={2} toggleEdit={this.toggleEdit} generalInfoToggleEditValues={this.state.toggleEditName}></CategoryInfo> */}
-        
+        {/* school name, data of study */}
+
         {/* job exp info */}
         {/* <CategoryInfo categoryName={'job exp info'} numberOfFormFields={4} toggleEdit={this.toggleEdit} generalInfoToggleEditValues={this.state.toggleEditName}></CategoryInfo> */}
-        
+        {/* company name, job position, work from until data */}
       </div>
     );
   }
