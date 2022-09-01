@@ -1,9 +1,0 @@
-components
-    App
-    GeneralInfo 
-    EducationInfo
-    JobExpInfo
-App
-    UserInfo
-    EducationalExperiences
-    PracticalExperiences
