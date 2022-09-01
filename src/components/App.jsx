@@ -118,7 +118,7 @@ class App extends React.Component {
               labelText:'name',
               fieldName:this.state.nameInput,
               toggleButtonId:'toggleEditName',
-              toggleButtonText:this.state.toggleEditName === 'notInEditMode' ? 'edit name':'submit',
+              toggleButtonText:this.state.toggleEditName === 'notInEditMode' ? 'edit':'submit',
               
               // input/submit
               inputId:'nameInput',
@@ -135,7 +135,7 @@ class App extends React.Component {
               labelText:'email',
               fieldName:this.state.emailInput,
               toggleButtonId:'toggleEditEmail',
-              toggleButtonText:this.state.toggleEditEmail === 'notInEditMode' ? 'edit name':'submit',
+              toggleButtonText:this.state.toggleEditEmail === 'notInEditMode' ? 'edit':'submit',
 
               // input/submit
               inputId:'emailInput',
@@ -161,7 +161,7 @@ class App extends React.Component {
               labelText:'school name',
               fieldName:this.state.schoolNameInput,
               toggleButtonId:'toggleEditSchoolName',
-              toggleButtonText:this.state.toggleEditSchoolName === 'notInEditMode' ? 'edit name':'submit',
+              toggleButtonText:this.state.toggleEditSchoolName === 'notInEditMode' ? 'edit':'submit',
               
               // input/submit
               inputId:'schoolNameInput',
@@ -177,7 +177,7 @@ class App extends React.Component {
               labelText:'date of study',
               fieldName:this.state.dateOfStudyInput,
               toggleButtonId:'toggleEditDateOfStudy',
-              toggleButtonText:this.state.toggleEditDateOfStudy === 'notInEditMode' ? 'edit name':'submit',
+              toggleButtonText:this.state.toggleEditDateOfStudy === 'notInEditMode' ? 'edit':'submit',
 
               // input/submit
               inputId:'dateOfStudyInput',
@@ -203,7 +203,7 @@ class App extends React.Component {
               labelText:'company name',
               fieldName:this.state.companyNameInput,
               toggleButtonId:'toggleEditCompanyName',
-              toggleButtonText:this.state.toggleEditCompanyName === 'notInEditMode' ? 'edit name':'submit',
+              toggleButtonText:this.state.toggleEditCompanyName === 'notInEditMode' ? 'edit':'submit',
               
               // input/submit
               inputId:'companyNameInput',
@@ -219,7 +219,7 @@ class App extends React.Component {
               labelText:'job position title',
               fieldName:this.state.jobPositionTitleInput,
               toggleButtonId:'toggleEditCompanyJobPositionTitle',
-              toggleButtonText:this.state.toggleEditCompanyJobPositionTitle === 'notInEditMode' ? 'edit name':'submit',
+              toggleButtonText:this.state.toggleEditCompanyJobPositionTitle === 'notInEditMode' ? 'edit':'submit',
 
               // input/submit
               inputId:'jobPositionTitleInput',
@@ -235,7 +235,7 @@ class App extends React.Component {
               labelText:'main tasks of the job',
               fieldName:this.state.mainTasksOfJobInput,
               toggleButtonId:'toggleEditMainTasksOfJob',
-              toggleButtonText:this.state.toggleEditMainTasksOfJob === 'notInEditMode' ? 'edit name':'submit',
+              toggleButtonText:this.state.toggleEditMainTasksOfJob === 'notInEditMode' ? 'edit':'submit',
 
               // input/submit
               inputId:'mainTasksOfJobInput',
@@ -251,7 +251,7 @@ class App extends React.Component {
               labelText:'start and end date of work',
               fieldName:this.state.startAndEndDateInput,
               toggleButtonId:'toggleEditStartAndEndDate',
-              toggleButtonText:this.state.toggleEditStartAndEndDate === 'notInEditMode' ? 'edit name':'submit',
+              toggleButtonText:this.state.toggleEditStartAndEndDate === 'notInEditMode' ? 'edit':'submit',
 
               // input/submit
               inputId:'startAndEndDateInput',
