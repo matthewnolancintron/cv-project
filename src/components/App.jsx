@@ -2,7 +2,7 @@ import React from "react";
 import CategoryInfo from "./CategoryInfo";
 import { nanoid } from 'nanoid'
 
-let keysForFormFields = Array.from(Array(7),(e,i)=>nanoid());
+let keysForFormFields = Array.from(Array(8),(e,i)=>nanoid());
 
 class App extends React.Component {
   constructor(props) {
@@ -17,16 +17,27 @@ class App extends React.Component {
       //holds value from input
       nameInput:'',
       toggleEditEmail: "notInEditMode",
+      emailInput:'',
 
       // educational info
       toggleEditSchoolName: "notInEditMode",
+      schoolNameInput:'',
+
       toggleEditDateOfStudy: "notInEditMode",
+      dateOfStudyInput:'',
 
       // job info
       toggleEditCompanyName: "notInEditMode",
+      companyNameInput:'',
+
       toggleEditCompanyJobPositionTitle: "notInEditMode",
+      jobPositionTitleInput:'',
+
       toggleEditMainTasksOfJob: "notInEditMode",
+      mainTasksOfJobInput:'',
+
       toggleEditStartAndEndDate: "notInEditMode",
+      startAndEndDateInput:'',
     };
   }
 
@@ -120,30 +131,142 @@ class App extends React.Component {
 
             },
             {
-
-              //set similary to name
-              fieldName:'email',
+              // text/edit
+              labelText:'email',
+              fieldName:this.state.emailInput,
               toggleButtonId:'toggleEditEmail',
-              toggleButtonText:'edit',
+              toggleButtonText:this.state.toggleEditEmail === 'notInEditMode' ? 'edit name':'submit',
+
+              // input/submit
+              inputId:'emailInput',
+              inputValue:this.state.emailInput,
+              submitButtonId:'emailSubmit',
+
+              //both
               key:keysForFormFields[1],
               isInEditMode:this.state.toggleEditEmail
-
             }
           ]}
           toggleEdit={this.toggleEdit}
           handleInputChange={this.handleInputChange}
           >
-
           </CategoryInfo>
         
-        
         {/* education info */}
-        {/* <CategoryInfo categoryName={'education info'} numberOfFormFields={2} toggleEdit={this.toggleEdit} generalInfoToggleEditValues={this.state.toggleEditName}></CategoryInfo> */}
-        {/* school name, data of study */}
+        <CategoryInfo
+          categoryName={'education info'}
+          formFieldsData={[
+            {
+              // text/edit
+              labelText:'school name',
+              fieldName:this.state.schoolNameInput,
+              toggleButtonId:'toggleEditSchoolName',
+              toggleButtonText:this.state.toggleEditSchoolName === 'notInEditMode' ? 'edit name':'submit',
+              
+              // input/submit
+              inputId:'schoolNameInput',
+              inputValue:this.state.schoolNameInput,
+              submitButtonId:'schoolNameSubmit',
 
+              //both
+              key:keysForFormFields[2],
+              isInEditMode:this.state.toggleEditSchoolName,
+            },
+            {
+              // text/edit
+              labelText:'date of study',
+              fieldName:this.state.dateOfStudyInput,
+              toggleButtonId:'toggleEditDateOfStudy',
+              toggleButtonText:this.state.toggleEditDateOfStudy === 'notInEditMode' ? 'edit name':'submit',
+
+              // input/submit
+              inputId:'dateOfStudyInput',
+              inputValue:this.state.dateOfStudyInput,
+              submitButtonId:'dateOfStudySubmit',
+
+              // both
+              key:keysForFormFields[3],
+              isInEditMode:this.state.toggleEditDateOfStudy,
+            }
+          ]}
+          toggleEdit={this.toggleEdit}
+          handleInputChange={this.handleInputChange}
+          >
+          </CategoryInfo>
+        
         {/* job exp info */}
-        {/* <CategoryInfo categoryName={'job exp info'} numberOfFormFields={4} toggleEdit={this.toggleEdit} generalInfoToggleEditValues={this.state.toggleEditName}></CategoryInfo> */}
-        {/* company name, job position, work from until data */}
+        <CategoryInfo
+          categoryName={'job info'}
+          formFieldsData={[
+            {
+              // text/edit
+              labelText:'company name',
+              fieldName:this.state.companyNameInput,
+              toggleButtonId:'toggleEditCompanyName',
+              toggleButtonText:this.state.toggleEditCompanyName === 'notInEditMode' ? 'edit name':'submit',
+              
+              // input/submit
+              inputId:'companyNameInput',
+              inputValue:this.state.companyNameInput,
+              submitButtonId:'compnayNameSubmit',
+
+              //both
+              key:keysForFormFields[4],
+              isInEditMode:this.state.toggleEditCompanyName,
+            },
+            {
+              // text/edit
+              labelText:'job position title',
+              fieldName:this.state.jobPositionTitleInput,
+              toggleButtonId:'toggleEditCompanyJobPositionTitle',
+              toggleButtonText:this.state.toggleEditCompanyJobPositionTitle === 'notInEditMode' ? 'edit name':'submit',
+
+              // input/submit
+              inputId:'jobPositionTitleInput',
+              inputValue:this.state.jobPositionTitleInput,
+              submitButtonId:'jobPositionTitleInputSubmit',
+
+              // both
+              key:keysForFormFields[5],
+              isInEditMode:this.state.toggleEditCompanyJobPositionTitle,
+            },
+            {
+              // text/edit
+              labelText:'main tasks of the job',
+              fieldName:this.state.mainTasksOfJobInput,
+              toggleButtonId:'toggleEditMainTasksOfJob',
+              toggleButtonText:this.state.toggleEditMainTasksOfJob === 'notInEditMode' ? 'edit name':'submit',
+
+              // input/submit
+              inputId:'mainTasksOfJobInput',
+              inputValue:this.state.mainTasksOfJobInput,
+              submitButtonId:'mainTasksOfJobSubmit',
+
+              // both
+              key:keysForFormFields[6],
+              isInEditMode:this.state.toggleEditMainTasksOfJob,
+            },
+            {
+              // text/edit
+              labelText:'start and end date of work',
+              fieldName:this.state.startAndEndDateInput,
+              toggleButtonId:'toggleEditStartAndEndDate',
+              toggleButtonText:this.state.toggleEditStartAndEndDate === 'notInEditMode' ? 'edit name':'submit',
+
+              // input/submit
+              inputId:'startAndEndDateInput',
+              inputValue:this.startAndEndDateInput,
+              submitButtonId:'startAndEndDateInputSubmit',
+
+              // both
+              key:keysForFormFields[7],
+              isInEditMode:this.state.toggleEditStartAndEndDate,
+            },
+          ]}
+          toggleEdit={this.toggleEdit}
+          handleInputChange={this.handleInputChange}
+          >
+          </CategoryInfo>
       </div>
     );
   }
