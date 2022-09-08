@@ -1,9 +1,8 @@
 import React from "react";
 import FormField from "./formField";
 
-class CategoryInfo extends React.Component {
-  render() {
-    let formFields = this.props.formFieldsData.map((element, index) => {
+function CategoryInfo(props) {
+    let formFields = props.formFieldsData.map((element) => { 
       return (
         <FormField
           // conditional render could live here
@@ -12,28 +11,27 @@ class CategoryInfo extends React.Component {
           fieldName={element.fieldName}
           toggleButtonId={element.toggleButtonId}
           toggleButtonText={element.toggleButtonText}
-          toggleEdit={this.props.toggleEdit}
+          toggleEdit={props.toggleEdit}
 
           inputId={element.inputId}
           inputValue={element.inputValue}
-          handleInputChange={this.props.handleInputChange}
+          handleInputChange={props.handleInputChange}
 
           key={element.key}
           isInEditMode={element.isInEditMode}
-
         ></FormField>
       );
     });
-
+  
     return (
       <div>
         <br></br>
-        <h1>{this.props.categoryName}</h1>
+        <h1>{props.categoryName}</h1>
         <br></br>
         {formFields}
         <br></br>
       </div>
     );
   }
-}
+
 export default CategoryInfo;

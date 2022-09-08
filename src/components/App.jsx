@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useReducer} from 'react'
+import React,{useState} from 'react'
 import CategoryInfo from "./CategoryInfo";
 import { nanoid } from 'nanoid'
 
@@ -18,16 +18,17 @@ function App() {
     toggleEditStartAndEndDate:'notInEditMode',
   });
 
-
-  //todo: re-factore input state variable  
-  const [nameInput,setNameInput] = useState('');
-  const [emailInput,setEmailInput] = useState('');
-  const [schoolNameInput,setSchoolNameInput] = useState('');
-  const [dateOfStudyInput,setDateOfStudyInput] = useState('');
-  const [companyNameInput,setCompanyNameInput] = useState('');
-  const [jobPositionTitleInput,setJobPositionTitle] = useState('');
-  const [mainTasksOfJobInput,setMainTasksOfJobInput] = useState('');
-  const [startAndEndDateInput, setStartAndEndDateInput] = useState('');
+  //todo: re-factore input state variable
+  const [inputValues,setInputValues] = useState({
+    nameInput:'',
+    emailInput:'',
+    schoolNameInput:'',
+    dateOfStudyInput:'',
+    companyNameInput:'',
+    jobPositionTitleInput:'',
+    mainTasksOfJobInput:'',
+    startAndEndDateInput:'',
+  });
   
   const toggleEdit = (e) => {
   /**
@@ -47,11 +48,9 @@ function App() {
       that property will be used for the text display
       then re-use the toggle edit button when ready to switch back to "display mode"      
      */
-    // this.setState(state =>{
-    //   return{
-    //     [e.id]:e.value
-    //   };
-    // });
+    setInputValues(prevState =>{
+      return {...prevState,[e.id]:e.value};
+    })
 
   }
 
@@ -72,13 +71,13 @@ function App() {
           {
             // text/edit
             labelText:'name',
-            fieldName:nameInput,
+            fieldName:inputValues.nameInput,
             toggleButtonId:'toggleEditName',
             toggleButtonText:toggleEdits.toggleEditName === 'notInEditMode' ? 'edit':'submit',
             
             // input/submit
             inputId:'nameInput',
-            inputValue:nameInput,
+            inputValue:inputValues.nameInput,
             submitButtonId:'nameSubmit',
 
             //both
@@ -89,13 +88,13 @@ function App() {
           {
             // text/edit
             labelText:'email',
-            fieldName:emailInput,
+            fieldName:inputValues.emailInput,
             toggleButtonId:'toggleEditEmail',
             toggleButtonText:toggleEdits.toggleEditEmail === 'notInEditMode' ? 'edit':'submit',
 
             // input/submit
             inputId:'emailInput',
-            inputValue:emailInput,
+            inputValue:inputValues.emailInput,
             submitButtonId:'emailSubmit',
 
             //both
@@ -115,13 +114,13 @@ function App() {
           {
             // text/edit
             labelText:'school name',
-            fieldName:schoolNameInput,
+            fieldName:inputValues.schoolNameInput,
             toggleButtonId:'toggleEditSchoolName',
             toggleButtonText:toggleEdits.toggleEditSchoolName === 'notInEditMode' ? 'edit':'submit',
             
             // input/submit
             inputId:'schoolNameInput',
-            inputValue:schoolNameInput,
+            inputValue:inputValues.schoolNameInput,
             submitButtonId:'schoolNameSubmit',
 
             //both
@@ -131,13 +130,13 @@ function App() {
           {
             // text/edit
             labelText:'date of study',
-            fieldName:dateOfStudyInput,
+            fieldName:inputValues.dateOfStudyInput,
             toggleButtonId:'toggleEditDateOfStudy',
             toggleButtonText:toggleEdits.toggleEditDateOfStudy === 'notInEditMode' ? 'edit':'submit',
 
             // input/submit
             inputId:'dateOfStudyInput',
-            inputValue:dateOfStudyInput,
+            inputValue:inputValues.dateOfStudyInput,
             submitButtonId:'dateOfStudySubmit',
 
             // both
@@ -157,13 +156,13 @@ function App() {
           {
             // text/edit
             labelText:'company name',
-            fieldName:companyNameInput,
+            fieldName:inputValues.companyNameInput,
             toggleButtonId:'toggleEditCompanyName',
             toggleButtonText:toggleEdits.toggleEditCompanyName === 'notInEditMode' ? 'edit':'submit',
             
             // input/submit
             inputId:'companyNameInput',
-            inputValue:companyNameInput,
+            inputValue:inputValues.companyNameInput,
             submitButtonId:'compnayNameSubmit',
 
             //both
@@ -173,13 +172,13 @@ function App() {
           {
             // text/edit
             labelText:'job position title',
-            fieldName:jobPositionTitleInput,
+            fieldName:inputValues.jobPositionTitleInput,
             toggleButtonId:'toggleEditCompanyJobPositionTitle',
             toggleButtonText:toggleEdits.toggleEditCompanyJobPositionTitle === 'notInEditMode' ? 'edit':'submit',
 
             // input/submit
             inputId:'jobPositionTitleInput',
-            inputValue:jobPositionTitleInput,
+            inputValue:inputValues.jobPositionTitleInput,
             submitButtonId:'jobPositionTitleInputSubmit',
 
             // both
@@ -189,13 +188,13 @@ function App() {
           {
             // text/edit
             labelText:'main tasks of the job',
-            fieldName:mainTasksOfJobInput,
+            fieldName:inputValues.mainTasksOfJobInput,
             toggleButtonId:'toggleEditMainTasksOfJob',
             toggleButtonText:toggleEdits.toggleEditMainTasksOfJob === 'notInEditMode' ? 'edit':'submit',
 
             // input/submit
             inputId:'mainTasksOfJobInput',
-            inputValue:mainTasksOfJobInput,
+            inputValue:inputValues.mainTasksOfJobInput,
             submitButtonId:'mainTasksOfJobSubmit',
 
             // both
@@ -205,13 +204,13 @@ function App() {
           {
             // text/edit
             labelText:'start and end date of work',
-            fieldName:startAndEndDateInput,
+            fieldName:inputValues.startAndEndDateInput,
             toggleButtonId:'toggleEditStartAndEndDate',
             toggleButtonText:toggleEdits.toggleEditStartAndEndDate === 'notInEditMode' ? 'edit':'submit',
 
             // input/submit
             inputId:'startAndEndDateInput',
-            inputValue:startAndEndDateInput,
+            inputValue:inputValues.startAndEndDateInput,
             submitButtonId:'startAndEndDateInputSubmit',
 
             // both
@@ -226,6 +225,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
