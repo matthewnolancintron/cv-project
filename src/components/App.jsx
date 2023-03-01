@@ -2,274 +2,293 @@ import React from "react";
 import CategoryInfo from "./CategoryInfo";
 import { nanoid } from 'nanoid'
 
-let keysForFormFields = Array.from(Array(8),(e,i)=>nanoid());
+let keysForFormFields = Array.from(Array(8), (e, i) => nanoid());
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.state = {
-      // toggleEdit is set to notInEditMode or inEditMode
+export default function App() {
+  const [cvData, setCvData] = React.useState({
+    inputs: {
+      name: {
+        isEditing: false,
+        value: '',
+      },
 
-      // general info
-      toggleEditName: "notInEditMode",
-      //holds value from input
-      nameInput:'',
-      toggleEditEmail: "notInEditMode",
-      emailInput:'',
+      email: {
+        isEditing: false,
+        value: '',
+      },
 
-      // educational info
-      toggleEditSchoolName: "notInEditMode",
-      schoolNameInput:'',
+      schoolName: {
+        isEditing: false,
+        value: '',
+      },
 
-      toggleEditDateOfStudy: "notInEditMode",
-      dateOfStudyInput:'',
+      dateOfStudy: {
+        isEditing: false,
+        value: '',
+      },
 
-      // job info
-      toggleEditCompanyName: "notInEditMode",
-      companyNameInput:'',
+      companyName: {
+        isEditing: false,
+        value: '',
+      },
 
-      toggleEditCompanyJobPositionTitle: "notInEditMode",
-      jobPositionTitleInput:'',
+      jobPositionTitle: {
+        isEditing: false,
+        value: '',
+      },
 
-      toggleEditMainTasksOfJob: "notInEditMode",
-      mainTasksOfJobInput:'',
+      mainTasksOfJob: {
+        isEditing: false,
+        value: '',
+      },
 
-      toggleEditStartAndEndDate: "notInEditMode",
-      startAndEndDateInput:'',
-    };
-  }
-
-  toggleEdit(e) {
-    // should update state depeneding on edit or submit.
-    //button's id that was pressed.
-
-    /**
-     * toggles value in state associated with button's id
-     */
-    this.setState((state) => {
-      return {
-        [e.id]: state[e.id] === 'notInEditMode' ? 'inEditMode' : 'notInEditMode',
-      };
-    });
-  
-  }
-
-  handleInputChange(e){
-    /**
-      saves text from this input to a value in app's state it will save to the
-      correct property in state using the id of the input as "link"
-      that property will be used for the text display
-      then re-use the toggle edit button when ready to switch back to "display mode"      
-     */
-    this.setState(state =>{
-      return{
-        [e.id]:e.value
-      };
-    });
-
-  }
+      startAndEndDate: {
+        isEditing: false,
+        value: '',
+      },
+    },
+  });
 
   /**
-   * to use state to change what rendered in child components
-   * 
-   * option 1:
-   * could use component did update method in parent component
-   * to change parents state but the issues with that would be
-   * after changing state it would get called again unless 
-   * there is a soultion to that not an option as of now.
-   * 
-   * option 2:
-   * pass a callbackfunction into the set state method call that
-   * updates the toggleEdit state properties
-   * the callback would update a state properties that
-   * holds either text and edit or input and submmit
-   * and that would be used in the child component as a prop
-   * 
-   * option 3:
-   * use conditional render in child component that uses
-   * parent component state passed as props to child components
-   * to create the condition that determines the render for child
-   * components
-   * 
-   * to pass the updated toggle values to child components
-   * could create a few someThingName={this.state.someToggleEditValue}
-   * and get it in child component with this.props.someToggleEditValue
-   * or use a single x={and add a data structure that hold them for each section}
+    This function toggles the isEditing property of an input object
+    within the cvData state 
    */
-  render() {
-    return (
-      <div>
-        {/* general info */}
-        <CategoryInfo
-          categoryName={'general info'}
-          formFieldsData={[
-            /**
-              button id shares it's name with the toogle edit values
-              in app's state since it's used in the toggle edit method
-              to determine which state value to update
-              depending on which formField button was pressed
-              the names link the buttons to the correct 
-              property in state.
-            */
-            {
-              // text/edit
-              labelText:'name',
-              fieldName:this.state.nameInput,
-              toggleButtonId:'toggleEditName',
-              toggleButtonText:this.state.toggleEditName === 'notInEditMode' ? 'edit':'submit',
-              
-              // input/submit
-              inputId:'nameInput',
-              inputValue:this.state.nameInput,
-              submitButtonId:'nameSubmit',
+  function toggleEdit(e) {
+    setCvData(prevState => ({
+      ...prevState, // spread operator to copy the previous state
+      inputs: {
+        ...prevState.inputs, // spread operator to copy the previous inputs
 
-              //both
-              key:keysForFormFields[0],
-              isInEditMode:this.state.toggleEditName,
-
-            },
-            {
-              // text/edit
-              labelText:'email',
-              fieldName:this.state.emailInput,
-              toggleButtonId:'toggleEditEmail',
-              toggleButtonText:this.state.toggleEditEmail === 'notInEditMode' ? 'edit':'submit',
-
-              // input/submit
-              inputId:'emailInput',
-              inputValue:this.state.emailInput,
-              submitButtonId:'emailSubmit',
-
-              //both
-              key:keysForFormFields[1],
-              isInEditMode:this.state.toggleEditEmail
-            }
-          ]}
-          toggleEdit={this.toggleEdit}
-          handleInputChange={this.handleInputChange}
-          >
-          </CategoryInfo>
-        
-        {/* education info */}
-        <CategoryInfo
-          categoryName={'education info'}
-          formFieldsData={[
-            {
-              // text/edit
-              labelText:'school name',
-              fieldName:this.state.schoolNameInput,
-              toggleButtonId:'toggleEditSchoolName',
-              toggleButtonText:this.state.toggleEditSchoolName === 'notInEditMode' ? 'edit':'submit',
-              
-              // input/submit
-              inputId:'schoolNameInput',
-              inputValue:this.state.schoolNameInput,
-              submitButtonId:'schoolNameSubmit',
-
-              //both
-              key:keysForFormFields[2],
-              isInEditMode:this.state.toggleEditSchoolName,
-            },
-            {
-              // text/edit
-              labelText:'date of study',
-              fieldName:this.state.dateOfStudyInput,
-              toggleButtonId:'toggleEditDateOfStudy',
-              toggleButtonText:this.state.toggleEditDateOfStudy === 'notInEditMode' ? 'edit':'submit',
-
-              // input/submit
-              inputId:'dateOfStudyInput',
-              inputValue:this.state.dateOfStudyInput,
-              submitButtonId:'dateOfStudySubmit',
-
-              // both
-              key:keysForFormFields[3],
-              isInEditMode:this.state.toggleEditDateOfStudy,
-            }
-          ]}
-          toggleEdit={this.toggleEdit}
-          handleInputChange={this.handleInputChange}
-          >
-          </CategoryInfo>
-        
-        {/* job exp info */}
-        <CategoryInfo
-          categoryName={'job info'}
-          formFieldsData={[
-            {
-              // text/edit
-              labelText:'company name',
-              fieldName:this.state.companyNameInput,
-              toggleButtonId:'toggleEditCompanyName',
-              toggleButtonText:this.state.toggleEditCompanyName === 'notInEditMode' ? 'edit':'submit',
-              
-              // input/submit
-              inputId:'companyNameInput',
-              inputValue:this.state.companyNameInput,
-              submitButtonId:'compnayNameSubmit',
-
-              //both
-              key:keysForFormFields[4],
-              isInEditMode:this.state.toggleEditCompanyName,
-            },
-            {
-              // text/edit
-              labelText:'job position title',
-              fieldName:this.state.jobPositionTitleInput,
-              toggleButtonId:'toggleEditCompanyJobPositionTitle',
-              toggleButtonText:this.state.toggleEditCompanyJobPositionTitle === 'notInEditMode' ? 'edit':'submit',
-
-              // input/submit
-              inputId:'jobPositionTitleInput',
-              inputValue:this.state.jobPositionTitleInput,
-              submitButtonId:'jobPositionTitleInputSubmit',
-
-              // both
-              key:keysForFormFields[5],
-              isInEditMode:this.state.toggleEditCompanyJobPositionTitle,
-            },
-            {
-              // text/edit
-              labelText:'main tasks of the job',
-              fieldName:this.state.mainTasksOfJobInput,
-              toggleButtonId:'toggleEditMainTasksOfJob',
-              toggleButtonText:this.state.toggleEditMainTasksOfJob === 'notInEditMode' ? 'edit':'submit',
-
-              // input/submit
-              inputId:'mainTasksOfJobInput',
-              inputValue:this.state.mainTasksOfJobInput,
-              submitButtonId:'mainTasksOfJobSubmit',
-
-              // both
-              key:keysForFormFields[6],
-              isInEditMode:this.state.toggleEditMainTasksOfJob,
-            },
-            {
-              // text/edit
-              labelText:'start and end date of work',
-              fieldName:this.state.startAndEndDateInput,
-              toggleButtonId:'toggleEditStartAndEndDate',
-              toggleButtonText:this.state.toggleEditStartAndEndDate === 'notInEditMode' ? 'edit':'submit',
-
-              // input/submit
-              inputId:'startAndEndDateInput',
-              inputValue:this.startAndEndDateInput,
-              submitButtonId:'startAndEndDateInputSubmit',
-
-              // both
-              key:keysForFormFields[7],
-              isInEditMode:this.state.toggleEditStartAndEndDate,
-            },
-          ]}
-          toggleEdit={this.toggleEdit}
-          handleInputChange={this.handleInputChange}
-          >
-          </CategoryInfo>
-      </div>
-    );
+        // bracket notation to use the value of e.dataset.inputType as the new key
+        [e.dataset.inputType]: { 
+          
+          // spread operator to copy the previous inputType object
+          ...prevState.inputs[e.dataset.inputType],
+          
+          // toggle the isEditing value
+          [e.dataset.inputProperty]: 
+          !prevState.inputs[e.dataset.inputType].isEditing, 
+        },
+      },
+    }));
   }
+
+/**
+ * Updates cvData input value data based on input
+ * and is called on its onChange event.
+ */
+function handleInputChange(e) {
+  setCvData(prevState => ({
+    ...prevState, // spread operator to copy the previous state
+    inputs: {
+      ...prevState.inputs, // spread operator to copy the previous inputs
+
+      // bracket notation to use the value of e.dataset.inputType as
+      // the new key
+      [e.dataset.inputType]: {
+
+        // spread operator to copy the previous inputType object
+        ...prevState.inputs[e.dataset.inputType],
+
+        // update the inputProperty with the new value from the event object
+        [e.dataset.inputProperty]: e.value,
+      },
+    },
+  }));
 }
 
-export default App;
+  return (
+    <div>
+      {/* general info */}
+      <CategoryInfo
+        categoryName={'general info'}
+        formFieldsData={[
+          {
+            // edit
+            labelText: 'name',
+            fieldName: cvData.inputs.name.value,
+            toggleButtonText: cvData.inputs.name.isEditing ? 'submit' : 'edit',
+
+            // input/submit
+            inputValue: cvData.inputs.name.value,
+            submitButtonId: 'nameSubmit',
+
+            //both
+            key: keysForFormFields[0],
+            isInEditMode: cvData.inputs.name.isEditing,
+
+            //input and button data
+            inputTypeForInput:'name',
+            inputPropertyForInput:'value',
+            inputTypeForButton:'name',
+            inputPropertyForButton:'isEditing',
+          },
+          {
+            // edit
+            labelText: 'email',
+            fieldName: cvData.inputs.email.value,
+            
+            toggleButtonText: cvData.inputs.email.isEditing ? 'submit' : 'edit',
+
+            // input/submit
+            inputValue: cvData.inputs.email.value,
+            submitButtonId: 'emailSubmit',
+
+            //both
+            key: keysForFormFields[1],
+            isInEditMode: cvData.inputs.email.isEditing,
+
+            inputTypeForInput:'email',
+            inputPropertyForInput:'value',
+            inputTypeForButton:'email',
+            inputPropertyForButton:'isEditing',
+          }
+        ]}
+        toggleEdit={toggleEdit}
+        handleInputChange={handleInputChange}
+      >
+      </CategoryInfo>
+
+      {/* education info */}
+      <CategoryInfo
+        categoryName={'education info'}
+        formFieldsData={[
+          {
+            // text/edit
+            labelText: 'school name',
+            fieldName: cvData.inputs.schoolName.value,
+
+            
+            toggleButtonText: cvData.inputs.schoolName.isEditing ? 'submit' : 'edit',
+
+            // input/submit
+            inputValue: cvData.inputs.schoolName.value,
+            submitButtonId: 'schoolNameSubmit',
+
+            //both
+            key: keysForFormFields[2],
+            isInEditMode: cvData.inputs.schoolName.isEditing,
+
+            inputTypeForInput:'schoolName',
+            inputPropertyForInput:'value',
+            inputTypeForButton:'schoolName',
+            inputPropertyForButton:'isEditing',
+          },
+          {
+            // text/edit
+            labelText: 'date of study',
+            fieldName: cvData.inputs.dateOfStudy.value,
+            
+            toggleButtonText: cvData.inputs.dateOfStudy.isEditing ? 'submit' : 'edit',
+
+            // input/submit
+            inputValue: cvData.inputs.dateOfStudy.value,
+            submitButtonId: 'dateOfStudySubmit',
+
+            // both
+            key: keysForFormFields[3],
+            isInEditMode: cvData.inputs.dateOfStudy.isEditing,
+
+            inputTypeForInput:'dateOfStudy',
+            inputPropertyForInput:'value',
+            inputTypeForButton:'dateOfStudy',
+            inputPropertyForButton:'isEditing',
+          }
+        ]}
+        toggleEdit={toggleEdit}
+        handleInputChange={handleInputChange}
+      >
+      </CategoryInfo>
+
+      {/* job exp info */}
+      <CategoryInfo
+        categoryName={'job info'}
+        formFieldsData={[
+          {
+            // text/edit
+            labelText: 'company name',
+            fieldName: cvData.inputs.companyName.value,
+            
+            toggleButtonText: cvData.inputs.companyName.isEditing ? 'submit' : 'edit',
+
+            // input/submit
+            inputValue: cvData.inputs.companyName.value,
+            submitButtonId: 'compnayNameSubmit',
+
+            //both
+            key: keysForFormFields[4],
+            isInEditMode: cvData.inputs.companyName.isEditing,
+
+            inputTypeForInput:'companyName',
+            inputPropertyForInput:'value',
+            inputTypeForButton:'companyName',
+            inputPropertyForButton:'isEditing',
+          },
+          {
+            // text/edit
+            labelText: 'job position title',
+            fieldName: cvData.inputs.jobPositionTitle.value,
+            
+            toggleButtonText: cvData.inputs.jobPositionTitle.isEditing ? 'submit' : 'edit',
+
+            // input/submit
+            inputValue: cvData.inputs.jobPositionTitle.value,
+            submitButtonId: 'jobPositionTitleInputSubmit',
+
+            // both
+            key: keysForFormFields[5],
+            isInEditMode: cvData.inputs.jobPositionTitle.isEditing,
+
+            inputTypeForInput:'jobPositionTitle',
+            inputPropertyForInput:'value',
+            inputTypeForButton:'jobPositionTitle',
+            inputPropertyForButton:'isEditing',
+          },
+          {
+            // text/edit
+            labelText: 'main tasks of the job',
+            fieldName: cvData.inputs.mainTasksOfJob.value,
+            
+            toggleButtonText: cvData.inputs.mainTasksOfJob.isEditing ? 'submit' : 'edit',
+
+            // input/submit
+            inputValue: cvData.inputs.mainTasksOfJob.value,
+            submitButtonId: 'mainTasksOfJobSubmit',
+
+            // both
+            key: keysForFormFields[6],
+            isInEditMode: cvData.inputs.mainTasksOfJob.isEditing,
+
+            inputTypeForInput:'mainTasksOfJob',
+            inputPropertyForInput:'value',
+            inputTypeForButton:'mainTasksOfJob',
+            inputPropertyForButton:'isEditing',
+          },
+          {
+            // text/edit
+            labelText: 'start and end date of work',
+            fieldName: cvData.inputs.startAndEndDate.value,
+            
+            toggleButtonText: cvData.inputs.startAndEndDate.isEditing ? 'submit' : 'edit',
+
+            // input/submit
+            inputValue: cvData.inputs.startAndEndDate.value,
+            submitButtonId: 'startAndEndDateInputSubmit',
+
+            // both
+            key: keysForFormFields[7],
+            isInEditMode: cvData.inputs.startAndEndDate.isEditing,
+
+            inputTypeForInput:'startAndEndDate',
+            inputPropertyForInput:'value',
+            inputTypeForButton:'startAndEndDate',
+            inputPropertyForButton:'isEditing',
+          },
+        ]}
+        toggleEdit={toggleEdit}
+        handleInputChange={handleInputChange}
+      >
+      </CategoryInfo>
+    </div>
+  );
+}
